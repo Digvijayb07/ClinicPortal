@@ -1,0 +1,138 @@
+import { MapPin, Phone, Mail, Clock, Award, Users, Heart } from "lucide-react";
+
+const About = () => {
+  return (
+    <main className="pt-20">
+      {/* Hero Section */}
+      <section className="section-padding bg-gradient-subtle">
+        <div className="container-custom">
+          <div className="max-w-3xl mx-auto text-center animate-fade-in">
+            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-medium text-sm mb-6">
+              About Us
+            </span>
+            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+              Your Partner in Health & Wellness
+            </h1>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              At HealthCare Clinic, we've been serving our community for over 15 years with dedication, expertise, and compassion. Our mission is simple: to help you achieve optimal health through personalized, evidence-based care.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* About Content */}
+      <section className="section-padding bg-card">
+        <div className="container-custom">
+          <div className="grid lg:grid-cols-2 gap-16">
+            {/* Introduction */}
+            <div className="animate-fade-in">
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">
+                Our Story
+              </h2>
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <p>
+                  Founded in 2009, HealthCare Clinic began with a simple vision: to create a healthcare facility where patients receive not just treatment, but genuine care and attention. Dr. James Mitchell, our lead chiropractor and founder, built this practice on the belief that every patient deserves a personalized approach to their health journey.
+                </p>
+                <p>
+                  Over the years, we've grown into a comprehensive wellness center offering chiropractic care, sports rehabilitation, and various therapeutic procedures. Our team of dedicated professionals shares a common goal — to help you live your best, healthiest life.
+                </p>
+                <p>
+                  Today, we continue to invest in the latest techniques and technologies to ensure our patients receive the highest quality care possible. We're proud to be a trusted healthcare partner for thousands of individuals and families in our community.
+                </p>
+              </div>
+            </div>
+
+            {/* Why Choose Us */}
+            <div className="animate-fade-in" style={{ animationDelay: "0.2s" }}>
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">
+                Why Choose Us
+              </h2>
+              <div className="space-y-6">
+                {[
+                  {
+                    icon: Award,
+                    title: "Expert Care",
+                    description: "Board-certified professionals with specialized training in chiropractic care and sports medicine.",
+                  },
+                  {
+                    icon: Users,
+                    title: "Patient-Centered Approach",
+                    description: "We listen to your concerns and develop customized treatment plans tailored to your unique needs.",
+                  },
+                  {
+                    icon: Heart,
+                    title: "Compassionate Service",
+                    description: "We treat every patient like family, providing warm, supportive care in a comfortable environment.",
+                  },
+                ].map((item) => (
+                  <div key={item.title} className="flex gap-4 p-6 rounded-xl bg-background border border-border">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                      <item.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-lg text-foreground mb-2">{item.title}</h3>
+                      <p className="text-muted-foreground">{item.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Information */}
+      <section className="section-padding bg-gradient-subtle">
+        <div className="container-custom">
+          <div className="text-center mb-12 animate-fade-in">
+            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Visit Our Clinic
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              We'd love to welcome you to our modern, comfortable facility.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                icon: MapPin,
+                title: "Address",
+                content: "123 Medical Center Drive\nSuite 100\nCity, State 12345",
+              },
+              {
+                icon: Phone,
+                title: "Phone",
+                content: "(555) 123-4567",
+              },
+              {
+                icon: Mail,
+                title: "Email",
+                content: "info@healthcareclinic.com",
+              },
+              {
+                icon: Clock,
+                title: "Clinic Hours",
+                content: "Mon - Fri: 8:00 AM - 6:00 PM\nSat: 9:00 AM - 2:00 PM\nSun: Closed",
+              },
+            ].map((item, index) => (
+              <div
+                key={item.title}
+                className="text-center p-6 rounded-2xl bg-card shadow-card border border-border animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="w-14 h-14 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                  <item.icon className="w-7 h-7 text-primary" />
+                </div>
+                <h3 className="font-semibold text-lg text-foreground mb-2">{item.title}</h3>
+                <p className="text-muted-foreground whitespace-pre-line">{item.content}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+};
+
+export default About;

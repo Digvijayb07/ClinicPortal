@@ -58,7 +58,7 @@ const Navbar = () => {
               <Stethoscope className="w-5 h-5 text-primary-foreground" />
             </div>
             <span className="font-serif text-xl font-semibold text-foreground">
-              HealthCare Clinic
+              PhysioFit Clinic
             </span>
           </Link>
 
@@ -126,8 +126,11 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-            <Button className="ml-4" size="lg">
-              Book Appointment
+            <Button className="ml-2" size="sm" variant="outline" asChild>
+              <Link to="/login/patient">Patient Login</Link>
+            </Button>
+            <Button className="ml-2" size="sm" asChild>
+              <Link to="/login/therapist">Therapist Login</Link>
             </Button>
           </div>
 
@@ -203,8 +206,11 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-            <Button className="mt-4 w-full" size="lg">
-              Book Appointment
+            <Button className="mt-4 w-full" size="lg" variant="outline" asChild>
+              <Link to="/login/patient">Patient Login</Link>
+            </Button>
+            <Button className="mt-2 w-full" size="lg" asChild>
+              <Link to="/login/therapist">Therapist Login</Link>
             </Button>
           </div>
         </div>

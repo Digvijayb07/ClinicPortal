@@ -13,11 +13,11 @@ const Footer = () => {
                 <Stethoscope className="w-5 h-5 text-primary-foreground" />
               </div>
               <span className="font-serif text-xl font-semibold">
-                HealthCare Clinic
+                PhysioFit Clinic
               </span>
             </Link>
             <p className="text-primary-foreground/70 mb-6">
-              Providing exceptional healthcare services with compassion and expertise for over 15 years.
+              Dr. Aditi's PhysioFit - Advanced Physiotherapy and Sports Clinic. Expert care for athletes and patients.
             </p>
             <div className="flex gap-4">
               <a href="#" className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary transition-smooth">
@@ -90,7 +90,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-primary shrink-0" />
-                <span className="text-primary-foreground/70">info@healthcareclinic.com</span>
+                <span className="text-primary-foreground/70">info@physiofitclinic.com</span>
               </li>
               <li className="flex items-start gap-3">
                 <Clock className="w-5 h-5 text-primary mt-0.5 shrink-0" />
@@ -108,7 +108,7 @@ const Footer = () => {
       <div className="border-t border-primary-foreground/10">
         <div className="container-custom py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-primary-foreground/50 text-sm">
-            <p>© 2024 HealthCare Clinic. All rights reserved.</p>
+            <p>© 2024 PhysioFit Clinic. All rights reserved.</p>
             <div className="flex gap-6">
               <a href="#" className="hover:text-primary-foreground transition-smooth">Privacy Policy</a>
               <a href="#" className="hover:text-primary-foreground transition-smooth">Terms of Service</a>

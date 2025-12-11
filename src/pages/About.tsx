@@ -14,7 +14,7 @@ const About = () => {
               Your Partner in Health & Wellness
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              At HealthCare Clinic, we've been serving our community for over 15 years with dedication, expertise, and compassion. Our mission is simple: to help you achieve optimal health through personalized, evidence-based care.
+              At PhysioFit Clinic, we provide advanced physiotherapy and sports rehabilitation services. Our mission is simple: to help you achieve optimal health through personalized, evidence-based care led by Dr. Aditi Kulkarni.
             </p>
           </div>
         </div>
@@ -31,13 +31,13 @@ const About = () => {
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Founded in 2009, HealthCare Clinic began with a simple vision: to create a healthcare facility where patients receive not just treatment, but genuine care and attention. Dr. James Mitchell, our lead chiropractor and founder, built this practice on the belief that every patient deserves a personalized approach to their health journey.
+                  Dr. Aditi's PhysioFit — Advanced Physiotherapy and Sports Clinic was founded with a vision to provide world-class physiotherapy and chiropractic care. Dr. Aditi Kulkarni, a Gold Medalist in Sports Physiotherapy, built this practice on the belief that every patient deserves a personalized approach to their health journey.
                 </p>
                 <p>
-                  Over the years, we've grown into a comprehensive wellness center offering chiropractic care, sports rehabilitation, and various therapeutic procedures. Our team of dedicated professionals shares a common goal — to help you live your best, healthiest life.
+                  With advanced certifications in Manual Therapy and Chiropractic Treatment, Dr. Aditi has worked extensively with athletes, including serving as a Sports Physiotherapist for the Mangalore Badminton Association and Dakshin Kannada Kabaddi Association.
                 </p>
                 <p>
-                  Today, we continue to invest in the latest techniques and technologies to ensure our patients receive the highest quality care possible. We're proud to be a trusted healthcare partner for thousands of individuals and families in our community.
+                  Today, PhysioFit Clinic continues to invest in the latest techniques and technologies to ensure our patients receive the highest quality care possible. We're proud to be a trusted healthcare partner for athletes and individuals seeking optimal recovery.
                 </p>
               </div>
             </div>
@@ -108,7 +108,7 @@ const About = () => {
               {
                 icon: Mail,
                 title: "Email",
-                content: "info@healthcareclinic.com",
+                content: "info@physiofitclinic.com",
               },
               {
                 icon: Clock,

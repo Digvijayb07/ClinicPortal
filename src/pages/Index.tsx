@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Award, GraduationCap, Dumbbell, Heart, Activity, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import ReviewCard from "@/components/ReviewCard";
+import draditi from "@/assets/draditi.jpeg";
 
 const Index = () => {
   const reviews = [
@@ -49,50 +50,65 @@ const Index = () => {
       {/* Hero Section - Doctor */}
       <section className="section-padding bg-gradient-subtle">
         <div className="container-custom">
-          <div className="max-w-4xl mx-auto text-center animate-fade-in">
-            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-medium text-sm mb-6">
-              Welcome to PhysioFit Clinic
-            </span>
-            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 leading-tight">
-              Dr. Aditi Kulkarni
-            </h1>
-            <p className="text-xl text-primary font-medium mb-6">
-              Founder | Sports & Orthopaedic Physiotherapist | Chiropractor | Gold Medalist
-            </p>
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-3xl mx-auto">
-              Dr. Aditi Kulkarni is a passionate and dedicated physiotherapist with advanced expertise in Sports Rehabilitation and Chiropractic Care. A Gold Medalist in Sports Physiotherapy, she is also the founder of Dr. Aditi's PhysioFit — Advanced Physiotherapy and Sports Clinic.
-            </p>
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed max-w-3xl mx-auto">
-              With multiple advanced certifications in Manual Therapy and Chiropractic Treatment, Dr. Aditi has worked extensively with athletes, including serving as a Sports Physiotherapist for the Mangalore Badminton Association and Dakshin Kannada Kabaddi Association, as well as providing on-field physiotherapy across tournaments in Pune.
-            </p>
-            <p className="text-lg text-muted-foreground mb-10 leading-relaxed max-w-3xl mx-auto font-medium">
-              Her specialized approach ensures athletes not only recover safely but also return to their sport with enhanced strength, agility, and resilience.
-            </p>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10 max-w-3xl mx-auto">
-              {[
-                { icon: Award, label: "Achievement", value: "Gold Medalist" },
-                { icon: GraduationCap, label: "Specialization", value: "Sports Physio" },
-                { icon: Sparkles, label: "Certification", value: "Manual Therapy" },
-                { icon: Heart, label: "Approach", value: "Patient-Centered" },
-              ].map((stat) => (
-                <div key={stat.label} className="flex flex-col items-center gap-2 p-4 rounded-xl bg-card shadow-sm border border-border">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <stat.icon className="w-5 h-5 text-primary" />
-                  </div>
-                  <p className="text-sm text-muted-foreground">{stat.label}</p>
-                  <p className="font-semibold text-foreground text-sm">{stat.value}</p>
-                </div>
-              ))}
+          <div className="grid lg:grid-cols-2 gap-12 items-center animate-fade-in">
+            {/* Left - Photo */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative">
+                <div className="absolute inset-0 bg-primary/20 rounded-3xl transform rotate-3"></div>
+                <img 
+                  src={draditi} 
+                  alt="Dr. Aditi Kulkarni" 
+                  className="relative rounded-3xl shadow-elegant w-full max-w-md object-cover"
+                />
+              </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="xl" variant="hero" asChild>
-                <Link to="/contact">Book Appointment</Link>
-              </Button>
-              <Button size="xl" variant="outline" asChild>
-                <Link to="/about">Learn More</Link>
-              </Button>
+            {/* Right - Info */}
+            <div className="text-center lg:text-left">
+              <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-medium text-sm mb-6">
+                Welcome to PhysioFit Clinic
+              </span>
+              <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 leading-tight">
+                Dr. Aditi Kulkarni
+              </h1>
+              <p className="text-xl text-primary font-medium mb-6">
+                Founder | Sports & Orthopaedic Physiotherapist | Chiropractor | Gold Medalist
+              </p>
+              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                Dr. Aditi Kulkarni is a passionate and dedicated physiotherapist with advanced expertise in Sports Rehabilitation and Chiropractic Care. A Gold Medalist in Sports Physiotherapy, she is also the founder of Dr. Aditi's PhysioFit — Advanced Physiotherapy and Sports Clinic.
+              </p>
+              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
+                With multiple advanced certifications in Manual Therapy and Chiropractic Treatment, Dr. Aditi has worked extensively with athletes, including serving as a Sports Physiotherapist for the Mangalore Badminton Association and Dakshin Kannada Kabaddi Association, as well as providing on-field physiotherapy across tournaments in Pune.
+              </p>
+              <p className="text-lg text-muted-foreground mb-8 leading-relaxed font-medium">
+                Her specialized approach ensures athletes not only recover safely but also return to their sport with enhanced strength, agility, and resilience.
+              </p>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                {[
+                  { icon: Award, label: "Achievement", value: "Gold Medalist" },
+                  { icon: GraduationCap, label: "Specialization", value: "Sports Physio" },
+                  { icon: Sparkles, label: "Certification", value: "Manual Therapy" },
+                  { icon: Heart, label: "Approach", value: "Patient-Centered" },
+                ].map((stat) => (
+                  <div key={stat.label} className="flex flex-col items-center gap-2 p-4 rounded-xl bg-card shadow-sm border border-border">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <stat.icon className="w-5 h-5 text-primary" />
+                    </div>
+                    <p className="text-sm text-muted-foreground">{stat.label}</p>
+                    <p className="font-semibold text-foreground text-sm">{stat.value}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Button size="xl" variant="hero" asChild>
+                  <Link to="/contact">Book Appointment</Link>
+                </Button>
+                <Button size="xl" variant="outline" asChild>
+                  <Link to="/about">Learn More</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>

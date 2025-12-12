@@ -126,9 +126,6 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-            <Button className="ml-2" size="sm" variant="outline" asChild>
-              <Link to="/login/patient">Patient Login</Link>
-            </Button>
             <Button className="ml-2" size="sm" asChild>
               <Link to="/login/therapist">Therapist Login</Link>
             </Button>
@@ -206,10 +203,7 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-            <Button className="mt-4 w-full" size="lg" variant="outline" asChild>
-              <Link to="/login/patient">Patient Login</Link>
-            </Button>
-            <Button className="mt-2 w-full" size="lg" asChild>
+            <Button className="mt-4 w-full" size="lg" asChild>
               <Link to="/login/therapist">Therapist Login</Link>
             </Button>
           </div>

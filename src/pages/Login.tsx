@@ -1,14 +1,12 @@
 import { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Stethoscope, User, UserCog, ArrowLeft } from "lucide-react";
+import { Stethoscope, UserCog, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Login = () => {
-  const { role } = useParams<{ role: string }>();
-  const isTherapist = role === "therapist";
   const { toast } = useToast();
   
   const [email, setEmail] = useState("");
@@ -44,20 +42,14 @@ const Login = () => {
           <div className="bg-card rounded-2xl shadow-lg border border-border p-8">
             {/* Header */}
             <div className="text-center mb-8">
-              <div className={`w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center ${isTherapist ? 'bg-primary' : 'bg-accent'}`}>
-                {isTherapist ? (
-                  <UserCog className="w-8 h-8 text-primary-foreground" />
-                ) : (
-                  <User className="w-8 h-8 text-accent-foreground" />
-                )}
+              <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center bg-primary">
+                <UserCog className="w-8 h-8 text-primary-foreground" />
               </div>
               <h1 className="font-serif text-2xl font-bold text-foreground mb-2">
-                {isTherapist ? "Therapist Login" : "Patient Login"}
+                Therapist Login
               </h1>
               <p className="text-muted-foreground">
-                {isTherapist 
-                  ? "Access your therapist dashboard" 
-                  : "Access your patient portal"}
+                Access your therapist dashboard
               </p>
             </div>
 
@@ -106,25 +98,6 @@ const Login = () => {
                 {isLoading ? "Signing in..." : "Sign In"}
               </Button>
             </form>
-
-            {/* Footer */}
-            <div className="mt-6 text-center text-sm text-muted-foreground">
-              {isTherapist ? (
-                <p>
-                  Are you a patient?{" "}
-                  <Link to="/login/patient" className="text-primary hover:underline">
-                    Patient Login
-                  </Link>
-                </p>
-              ) : (
-                <p>
-                  Are you a therapist?{" "}
-                  <Link to="/login/therapist" className="text-primary hover:underline">
-                    Therapist Login
-                  </Link>
-                </p>
-              )}
-            </div>
           </div>
 
           {/* Clinic Branding */}

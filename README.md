@@ -1,73 +1,103 @@
-# Welcome to your Lovable project
+# Clinic Appointment Booking System
 
-## Project info
+## Problem Statement
+Traditional clinic appointment systems rely heavily on manual processes such as phone calls or in-person scheduling. This often leads to issues like time consumption, poor follow-up, miscommunication, double bookings, and lack of centralized appointment management.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+This project aims to design and implement a web-based appointment booking system that simplifies scheduling for patients and provides an easy-to-use dashboard for therapists to manage appointments and availability.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## Objectives
+- To allow patients to book appointments online without login
+- To prevent double booking of time slots
+- To provide therapists with a centralized dashboard
+- To manage therapist availability dynamically
+- To improve efficiency and reduce manual workload
 
-**Use Lovable**
+---
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## System Overview
+The application consists of two main modules:
+1. Patient Module (Public)
+2. Therapist Module (Admin Dashboard)
 
-Changes made via Lovable will be committed automatically to this repo.
+---
 
-**Use your preferred IDE**
+## Features
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Patient Module  
+- View clinic information
+- Select appointment date
+- View available time slots dynamically
+- Book an appointment
+- Receive booking confirmation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+### Therapist Module
+- Secure therapist login
+- View all booked appointments
+- Weekly calendar view of appointments
+- View patient details (name, phone, email)
+- Mark appointments as completed or cancelled
+- Manage availability by setting working hours or blocking full days
 
-Follow these steps:
+---
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## Technology Stack
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
+### Frontend
+- React (Vite)
 - TypeScript
-- React
-- shadcn-ui
 - Tailwind CSS
+- React Router
+- shadcn/ui
+- Framer Amimation 
 
-## How can I deploy this project?
+### Backend
+- Supabase (PostgreSQL database)
+- Supabase Authentication
+- Row Level Security (RLS)
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+---
 
-## Can I connect a custom domain to my Lovable project?
+## Database Design
 
-Yes, you can!
+### Appointments Table
+| Field | Description |
+|------|------------|
+| id | Unique appointment ID |
+| date | Appointment date |
+| start_time | Start time |
+| end_time | End time |
+| patient_name | Patient name |
+| patient_phone | Patient phone |
+| patient_email | Patient email |
+| status | booked / completed / cancelled |
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+### Schedule Table
+| Field | Description |
+|------|------------|
+| date | Working date |
+| start_time | Start time |
+| end_time | End time |
+| slot_duration | Slot duration in minutes |
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+### Unavailable Table
+| Field | Description |
+|------|------------|
+| date | Blocked date |
+| start_time | Nullable |
+| end_time | Nullable |
+
+---
+
+## Booking Logic
+- Slots are generated based on therapist availability
+- Existing appointments are excluded from available slots
+- Double booking is prevented at database level
+- Appointment status updates are reflected in real-time
+
+---
+
+Conclusion
+
+This project demonstrates the practical application of full-stack web development concepts including frontend design, backend integration, database management, and real-world problem solving.

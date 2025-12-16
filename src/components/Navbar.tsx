@@ -126,9 +126,7 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-            <Button className="ml-2" size="sm" asChild>
-              <Link to="/login/therapist">Therapist Login</Link>
-            </Button>
+            
           </div>
 
           {/* Mobile Menu Button */}
@@ -203,9 +201,7 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-            <Button className="mt-4 w-full" size="lg" asChild>
-              <Link to="/login/therapist">Therapist Login</Link>
-            </Button>
+            
           </div>
         </div>
       </div>

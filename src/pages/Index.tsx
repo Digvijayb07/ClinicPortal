@@ -220,7 +220,7 @@ const Index = () => {
                 <Link to="/contact">Book Your Appointment</Link>
               </Button>
               <Button size="xl" variant="heroOutline" asChild>
-                <a href="tel:+15551234567">Call (555) 123-4567</a>
+                <a href="tel:+7219289369">Call 7219289369</a>
               </Button>
             </div>
           </div>

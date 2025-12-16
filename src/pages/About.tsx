@@ -98,22 +98,22 @@ const About = () => {
               {
                 icon: MapPin,
                 title: "Address",
-                content: "123 Medical Center Drive\nSuite 100\nCity, State 12345",
+                content: "PhysioFit Clinic: Shop no 20, Bansal Plaza, Dr. Aditi’s PhysioFit Clinic, Ravet, Pune, Maharashtra 412101",
               },
               {
                 icon: Phone,
                 title: "Phone",
-                content: "(555) 123-4567",
+                content: "+91 7219289369",
               },
               {
                 icon: Mail,
                 title: "Email",
-                content: "info@physiofitclinic.com",
+                content: "aditikulkarni2205@gmail.com",
               },
               {
                 icon: Clock,
                 title: "Clinic Hours",
-                content: "Mon - Fri: 8:00 AM - 6:00 PM\nSat: 9:00 AM - 2:00 PM\nSun: Closed",
+                content: "Morning: 8:00 AM - 1:00 PM\nEvening: 5:00 PM - 9:00 PM\nSunday Closed",
               },
             ].map((item, index) => (
               <div

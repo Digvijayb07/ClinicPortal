@@ -1,6 +1,7 @@
 import { Check, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import chiro from "@/assets/chiro.jpg";
 
 const ChiropracticCare = () => {
   const benefits = [
@@ -27,7 +28,8 @@ const ChiropracticCare = () => {
               Chiropractic Care
             </h1>
             <p className="text-xl text-primary-foreground/80 leading-relaxed">
-              Experience the natural path to pain relief and optimal health through our comprehensive chiropractic services.
+              Experience the natural path to pain relief and optimal health
+              through our comprehensive chiropractic services.
             </p>
           </div>
         </div>
@@ -43,14 +45,19 @@ const ChiropracticCare = () => {
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Chiropractic care is a holistic, non-invasive approach to healthcare that focuses on the diagnosis, treatment, and prevention of musculoskeletal disorders, particularly those affecting the spine. Our skilled chiropractors use hands-on spinal manipulation and other alternative treatments to properly align the body's musculoskeletal structure.
+                  Led by Dr. Aditi Kulkarni (Sports & Orthopaedic
+                  Physiotherapist, Chiropractor, Gold Medalist)
                 </p>
                 <p>
-                  The fundamental principle behind chiropractic care is that proper alignment of the body's structure, particularly the spine, enables the body to heal itself without surgery or medication. This approach addresses the root cause of pain and discomfort rather than just masking symptoms.
+                  Our chiropractic services restore balance and alignment in the
+                  spine and musculoskeletal system. Benefits include:
                 </p>
-                <p>
-                  At HealthCare Clinic, we combine traditional chiropractic techniques with modern diagnostic tools to provide the most effective treatment for each patient's unique needs.
-                </p>
+                <ul className="list-disc list-inside mt-4 space-y-1">
+                  <li>Relief from pain & stiffness</li>
+                  <li>Correction of spinal misalignments</li>
+                  <li>Improved posture & flexibility</li>
+                  <li>Enhanced nervous system function</li>
+                </ul>
               </div>
               <Button size="lg" className="mt-8" asChild>
                 <Link to="/contact">
@@ -59,23 +66,14 @@ const ChiropracticCare = () => {
                 </Link>
               </Button>
             </div>
-
-            {/* Benefits */}
-            <div className="animate-fade-in" style={{ animationDelay: "0.2s" }}>
-              <div className="bg-gradient-subtle p-8 rounded-2xl border border-border">
-                <h3 className="font-serif text-2xl font-bold text-foreground mb-6">
-                  Benefits of Chiropractic Care
-                </h3>
-                <ul className="space-y-4">
-                  {benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
-                        <Check className="w-4 h-4 text-primary" />
-                      </div>
-                      <span className="text-foreground">{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative">
+                <div className="absolute inset-0 bg-primary/20 rounded-3xl transform rotate-3"></div>
+                <img
+                  src={chiro}
+                  alt="Chiropractic Care"
+                  className="relative rounded-3xl shadow-elegant w-full max-w-md object-cover"
+                />
               </div>
             </div>
           </div>
@@ -90,7 +88,8 @@ const ChiropracticCare = () => {
               Ready to Start Your Healing Journey?
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-              Take the first step towards a pain-free life. Our experienced chiropractors are here to help you achieve optimal health.
+              Take the first step towards a pain-free life. Our experienced
+              chiropractors are here to help you achieve optimal health.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="xl" variant="hero" asChild>

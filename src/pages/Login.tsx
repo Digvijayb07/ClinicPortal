@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,31 +8,45 @@ import { useToast } from "@/hooks/use-toast";
 
 const Login = () => {
   const { toast } = useToast();
-  
+  const navigate = useNavigate(); 
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // Simulate login - you can integrate with Lovable Cloud later
-    setTimeout(() => {
+
+    const adminEmail = import.meta.env.VITE_THERAPIST_EMAIL;
+    const adminPass = import.meta.env.VITE_THERAPIST_PASS;
+
+    if (email === adminEmail && password === adminPass) {
+      localStorage.setItem("therapist_logged_in", "true");
+
       toast({
-        title: "Login functionality",
-        description: "Backend authentication will be set up when you enable Lovable Cloud.",
+        title: "Login successful",
+        description: "Welcome to your dashboard",
       });
-      setIsLoading(false);
-    }, 1000);
+
+      navigate("/dashboard");
+    } else {
+      toast({
+        title: "Invalid credentials",
+        description: "Please check your email or password",
+        variant: "destructive",
+      });
+    }
+
+    setIsLoading(false);
   };
 
   return (
     <main className="min-h-screen pt-20 bg-gradient-subtle flex items-center justify-center">
       <div className="container-custom py-12">
         <div className="max-w-md mx-auto">
-          <Link 
-            to="/" 
+          <Link
+            to="/"
             className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-smooth mb-8"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -40,7 +54,6 @@ const Login = () => {
           </Link>
 
           <div className="bg-card rounded-2xl shadow-lg border border-border p-8">
-            {/* Header */}
             <div className="text-center mb-8">
               <div className="w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center bg-primary">
                 <UserCog className="w-8 h-8 text-primary-foreground" />
@@ -53,7 +66,6 @@ const Login = () => {
               </p>
             </div>
 
-            {/* Login Form */}
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label htmlFor="email">Email Address</Label>
@@ -79,19 +91,9 @@ const Login = () => {
                 />
               </div>
 
-              <div className="flex items-center justify-between text-sm">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" className="rounded border-border" />
-                  <span className="text-muted-foreground">Remember me</span>
-                </label>
-                <a href="#" className="text-primary hover:underline">
-                  Forgot password?
-                </a>
-              </div>
-
-              <Button 
-                type="submit" 
-                className="w-full" 
+              <Button
+                type="submit"
+                className="w-full"
                 size="lg"
                 disabled={isLoading}
               >
@@ -100,13 +102,17 @@ const Login = () => {
             </form>
           </div>
 
-          {/* Clinic Branding */}
           <div className="mt-8 text-center">
-            <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-smooth">
+            <Link
+              to="/"
+              className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-smooth"
+            >
               <div className="w-8 h-8 rounded-lg bg-gradient-hero flex items-center justify-center">
                 <Stethoscope className="w-4 h-4 text-primary-foreground" />
               </div>
-              <span className="font-serif font-semibold">PhysioFit Clinic</span>
+              <span className="font-serif font-semibold">
+                PhysioFit Clinic
+              </span>
             </Link>
           </div>
         </div>

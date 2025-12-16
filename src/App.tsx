@@ -12,8 +12,14 @@ import SportsRehab from "./pages/SportsRehab";
 import Procedures from "./pages/Procedures";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
+import Dashboard from "@/pages/Dashboard";
 import Login from "./pages/Login";
 import NotFound from "./pages/NotFound";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import BookAppointment from "@/pages/BookAppointment";
+import BookingSuccess from "./pages/BookingSuccess";
+
+
 
 const queryClient = new QueryClient();
 
@@ -25,6 +31,17 @@ const App = () => (
       <BrowserRouter>
         <Navbar />
         <Routes>
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/book-appointment" element={<BookAppointment />} />
+          <Route path="/booking-success" element={<BookingSuccess />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
           <Route path="/services/chiropractic" element={<ChiropracticCare />} />
@@ -33,7 +50,7 @@ const App = () => (
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login/therapist" element={<Login />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import chiro from "@/assets/chiro.jpg";
 import { motion, Variants } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 /* ---------------- ANIMATION CONFIG ---------------- */
 
@@ -51,6 +52,14 @@ const ChiropracticCare = () => {
 
   return (
     <main className="pt-20">
+      <Helmet>
+        <title>Chiropractic Care in Ravet, Pune | Spine & Pain Treatment</title>
+        <meta
+          name="description"
+          content="Professional chiropractic care in Ravet, Pune for back pain, neck pain and posture correction. Safe, non-invasive treatments by experts."
+        />
+      </Helmet>
+
       {/* ================= HERO ================= */}
       <section className="section-padding bg-gradient-hero">
         <div className="container-custom">

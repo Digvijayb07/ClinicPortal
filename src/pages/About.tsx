@@ -8,6 +8,7 @@ import {
   Heart,
 } from "lucide-react";
 import { motion, Variants } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 const viewport = { once: true, margin: "-120px" };
 
@@ -42,6 +43,14 @@ const slideRight: Variants = {
 const About = () => {
   return (
     <main className="pt-20">
+      <Helmet>
+        <title>About Dr. Aditi Kulkarni | Best Physiotherapist in Ravet, Pune</title>
+        <meta
+          name="description"
+          content="Meet Dr. Aditi Kulkarni, Sports & Orthopaedic Physiotherapist and Chiropractor in Ravet, Pune. Gold medalist with years of clinical experience."
+        />
+      </Helmet>
+
       {/* ================= HERO ================= */}
       <section className="section-padding bg-gradient-subtle">
         <div className="container-custom">

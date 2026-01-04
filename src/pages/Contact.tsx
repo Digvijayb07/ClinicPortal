@@ -1,10 +1,18 @@
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-
+import { Helmet } from "react-helmet-async";
 const Contact = () => {
   return (
     <main className="pt-20">
+      <Helmet>
+        <title>Contact PhysioFit Clinic | Best Physiotherapist in Ravet, Pune</title>
+        <meta
+          name="description"
+          content="Contact Dr. Aditi’s PhysioFit Clinic in Ravet, Pune to book physiotherapy or chiropractic consultation. Call or visit us today."
+        />
+      </Helmet>
+
       {/* Hero Section */}
       <section className="section-padding bg-gradient-hero">
         <div className="container-custom">
@@ -80,7 +88,7 @@ const Contact = () => {
                       Evening: 05:00 PM – 09:00 PM
                       <br />
                       Sunday: Closed
-                    </>  
+                    </>
                   ),
                 },
               ].map((item) => (
@@ -96,7 +104,7 @@ const Contact = () => {
                       <a
                         href={item.link}
                         target="_blank"
-                        rel="noopener noreferrer"  
+                        rel="noopener noreferrer"
                         className="text-muted-foreground hover:text-primary transition-smooth whitespace-pre-line"
                       >
                         {item.content}
@@ -107,7 +115,7 @@ const Contact = () => {
                       </p>
                     )}
                   </div>
-                </div> 
+                </div>
               ))}
             </div>
 
@@ -122,7 +130,7 @@ const Contact = () => {
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Dr. Aditi’s PhysioFit Clinic Location"
               />
-            </div> 
+            </div>
 
           </div>
         </div>

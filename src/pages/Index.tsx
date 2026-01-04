@@ -12,8 +12,8 @@ import { Link } from "react-router-dom";
 import ReviewCard from "@/components/ReviewCard";
 import draditi from "@/assets/draditi.jpeg";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
-/* ---------------- SAFE MOTION CONFIG ---------------- */
 
 const viewport = { once: true, margin: "-120px" };
 
@@ -99,6 +99,16 @@ const Index = () => {
 
   return (
     <main className="pt-20 overflow-hidden">
+      <Helmet>
+        <title>
+          Physiotherapy & Chiropractic Clinic in Ravet, Pune | Dr. Aditi Kulkarni | PhysioFit
+        </title>
+        <meta
+          name="description"
+          content="Dr. Aditi’s PhysioFit Clinic in Ravet, Pune offers expert physiotherapy, chiropractic care, sports rehabilitation and pain management. Book your consultation today."
+        />
+      </Helmet>
+
       {/* ================= HERO ================= */}
       <section className="relative py-24">
         <motion.div

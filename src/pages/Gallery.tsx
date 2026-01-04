@@ -1,6 +1,6 @@
 import { Play } from "lucide-react";
 import { motion } from "framer-motion";
-
+import { Helmet } from "react-helmet-async";
 const videos = Array.from({ length: 10 }, (_, i) => ({
   src: `/videos/video${i + 1}.mp4`,
 }));
@@ -32,6 +32,14 @@ const itemVariants = {
 const Gallery = () => {
   return (
     <main className="pt-20">
+      <Helmet>
+        <title>Patient Recovery Videos & Testimonials | PhysioFit Clinic</title>
+        <meta
+          name="description"
+          content="Watch real patient recovery videos and testimonials from Dr. Aditi’s PhysioFit Clinic in Ravet, Pune."
+        />
+      </Helmet>
+
       {/* Hero Section */}
       <section className="section-padding bg-gradient-hero">
         <div className="container-custom">

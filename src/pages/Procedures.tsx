@@ -2,7 +2,7 @@ import { Hand, Layers, Dumbbell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { motion, Variants } from "framer-motion";
-
+import { Helmet } from "react-helmet-async";
 import dryneedling from "@/assets/dry-needling.jpg";
 import kinesio from "@/assets/kinesio-taping.jpg";
 import cupping from "@/assets/cupping.jpg";
@@ -85,6 +85,14 @@ const Procedures = () => {
 
   return (
     <main className="pt-20 overflow-hidden">
+      <Helmet>
+        <title>Physiotherapy Treatments & Procedures | Dr. Aditi PhysioFit</title>
+        <meta
+          name="description"
+          content="Explore physiotherapy procedures including dry needling, kinesio taping, pain management and rehabilitation at PhysioFit Clinic, Ravet."
+        />
+      </Helmet>
+
       {/* ================= HERO ================= */}
       <section className="section-padding bg-gradient-hero">
         <div className="container-custom">

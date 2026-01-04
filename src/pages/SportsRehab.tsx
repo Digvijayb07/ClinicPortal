@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import sportrehab from "@/assets/sportrehab.jpg";
 import { motion, Variants } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 /* ---------------- ANIMATION CONFIG ---------------- */
 
@@ -49,6 +50,14 @@ const SportsRehab = () => {
 
   return (
     <main className="pt-20">
+      <Helmet>
+        <title>Sports Rehabilitation in Ravet, Pune | Injury Recovery Clinic</title>
+        <meta
+          name="description"
+          content="Advanced sports rehabilitation in Ravet, Pune. Recover faster from injuries with expert physiotherapy and personalized rehab programs."
+        />
+      </Helmet>
+
       {/* ================= HERO ================= */}
       <section className="section-padding bg-gradient-hero">
         <div className="container-custom">

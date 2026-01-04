@@ -18,7 +18,7 @@ import NotFound from "./pages/NotFound";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import BookAppointment from "@/pages/BookAppointment";
 import BookingSuccess from "./pages/BookingSuccess";
-
+import ScrollToTop from "./components/ScrollToTop";
 
 
 const queryClient = new QueryClient();
@@ -29,6 +29,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+      <ScrollToTop/>
         <Navbar />
         <Routes>
           <Route

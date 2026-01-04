@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase";
-import { getAvailableSlots } from "@/lib/getAvailableSlots";
+import { getStaticSlots } from "@/lib/getStaticSlots";
 
 type BookingInput = {
   date: string;
@@ -20,18 +20,20 @@ export async function bookAppointment(input: BookingInput) {
     patient_phone,
   } = input;
 
-  // Re-check availability
-  const availableSlots = await getAvailableSlots(date);
+  const slots = await getStaticSlots(date);
 
-  const slotStillAvailable = availableSlots.some(
-    (slot) => slot.start === start_time && slot.end === end_time
+  const slot = slots.find(
+    (s) => s.start === start_time && s.end === end_time
   );
 
-  if (!slotStillAvailable) {
-    throw new Error("Selected slot is no longer available");
+  if (!slot) {
+    throw new Error("Invalid slot selected");
   }
 
-  // Insert appointment
+  if (slot.isPast) {
+    throw new Error("This time slot has already passed");
+  }
+
   const { error } = await supabase.from("appointments").insert({
     patient_name,
     patient_email,

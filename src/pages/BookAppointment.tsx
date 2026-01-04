@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
-import { getAvailableSlots } from "@/lib/getAvailableSlots";
+import { getStaticSlots } from "@/lib/getStaticSlots";
 import { bookAppointment } from "@/lib/bookAppointment";
 import { useToast } from "@/hooks/use-toast";
-import { Slot } from "@/lib/slotGenerator";
+import { Slot } from "@/lib/staticSlotGenerator";
 
 const BookAppointment = () => {
   const { toast } = useToast();
@@ -32,7 +32,7 @@ const BookAppointment = () => {
       setSelectedSlot(null);
 
       try {
-        const availableSlots = await getAvailableSlots(date);
+        const availableSlots = await getStaticSlots(date);
         setSlots(availableSlots);
       } catch {
         setSlots([]);
@@ -80,7 +80,7 @@ const BookAppointment = () => {
         description:
           error instanceof Error
             ? error.message
-            : "This slot is no longer available",
+            : "Something went wrong. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -91,6 +91,7 @@ const BookAppointment = () => {
   return (
     <main className="min-h-screen pt-20 bg-gradient-subtle">
       <div className="container-custom py-10 max-w-4xl space-y-10">
+        {/* Header */}
         <div>
           <h1 className="font-serif text-3xl font-bold">
             Book an Appointment
@@ -100,6 +101,14 @@ const BookAppointment = () => {
           </p>
         </div>
 
+        <div className="flex justify-end">
+          <p className="text-xs italic text-muted-foreground">
+            *Please call the clinic to confirm your appointment
+          </p>
+        </div>
+
+
+        {/* Date Picker */}
         <div className="bg-card p-6 rounded-2xl border border-border shadow-card">
           <label className="text-sm font-medium">Select Date</label>
           <Input
@@ -111,10 +120,15 @@ const BookAppointment = () => {
           />
         </div>
 
+        {/* Slots */}
         <div className="bg-card p-6 rounded-2xl border border-border shadow-card">
-          <h2 className="font-serif text-xl font-semibold mb-4">
+          <h2 className="font-serif text-xl font-semibold mb-2">
             Available Slots
           </h2>
+
+          <p className="text-sm text-muted-foreground mb-4">
+            Select a time slot to proceed with booking
+          </p>
 
           {!date && (
             <p className="text-muted-foreground text-sm">
@@ -130,9 +144,7 @@ const BookAppointment = () => {
 
           {!loading && date && slots.length === 0 && (
             <p className="text-muted-foreground text-sm">
-              {date === today
-                ? "No slots available for today. Please select another date."
-                : "No slots available for this date."}
+              No slots available for this date.
             </p>
           )}
 
@@ -141,22 +153,31 @@ const BookAppointment = () => {
               {slots.map((slot) => (
                 <button
                   key={`${slot.start}-${slot.end}`}
-                  onClick={() => setSelectedSlot(slot)}
+                  disabled={slot.isPast}
+                  onClick={() => !slot.isPast && setSelectedSlot(slot)}
                   className={cn(
                     "px-4 py-3 rounded-xl border text-sm transition-all",
-                    selectedSlot?.start === slot.start
-                      ? "bg-primary text-primary-foreground border-primary"
-                      : "bg-card hover:border-primary"
+                    slot.isPast
+                      ? "bg-muted text-muted-foreground cursor-not-allowed"
+                      : selectedSlot?.start === slot.start
+                        ? "bg-primary text-primary-foreground border-primary"
+                        : "bg-card hover:border-primary"
                   )}
                 >
                   {slot.label}
+                  {slot.isPast && (
+                    <span className="block text-xs mt-1">
+                      Time Passed
+                    </span>
+                  )}
                 </button>
               ))}
             </div>
           )}
         </div>
 
-        {selectedSlot && (
+        {/* Patient Details */}
+        {selectedSlot && !selectedSlot.isPast && (
           <div className="bg-card p-6 rounded-2xl border border-border shadow-card space-y-4">
             <h2 className="font-serif text-xl font-semibold">
               Patient Details
@@ -183,7 +204,7 @@ const BookAppointment = () => {
               onClick={handleConfirm}
               disabled={booking}
             >
-              {booking ? "Booking..." : "Confirm Appointment"}
+              {booking ? "Submitting..." : "Request Appointment"}
             </Button>
           </div>
         )}

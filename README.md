@@ -83,7 +83,7 @@ The application consists of two main modules:
 
 ### Unavailable Table
 | Field | Description |
-|------|------------|
+|------|------------| 
 | date | Blocked date |
 | start_time | Nullable |
 | end_time | Nullable |

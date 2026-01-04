@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 
 type Appointment = {
@@ -26,19 +25,10 @@ function getWeekDates(base: Date) {
 }
 
 const Dashboard = () => {
-  const [tab, setTab] = useState<"appointments" | "calendar" | "availability">(
-    "appointments"
-  );
-
+  const [tab, setTab] = useState<"appointments" | "calendar">("appointments");
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [selected, setSelected] = useState<Appointment | null>(null);
-
   const [weekStart, setWeekStart] = useState(new Date());
-
-  const [date, setDate] = useState("");
-  const [start, setStart] = useState("10:00");
-  const [end, setEnd] = useState("17:00");
-  const [onLeave, setOnLeave] = useState(false);
 
   const loadAppointments = async () => {
     const { data } = await supabase
@@ -52,58 +42,9 @@ const Dashboard = () => {
     setAppointments(data || []);
   };
 
-  const loadAvailability = async (d: string) => {
-    const { data: leave } = await supabase
-      .from("unavailable")
-      .select("id")
-      .eq("date", d)
-      .is("start_time", null)
-      .is("end_time", null)
-      .maybeSingle();
-
-    setOnLeave(!!leave);
-
-    const { data: schedule } = await supabase
-      .from("schedule")
-      .select("start_time, end_time")
-      .eq("date", d)
-      .maybeSingle();
-
-    if (schedule) {
-      setStart(schedule.start_time);
-      setEnd(schedule.end_time);
-    }
-  };
-
   useEffect(() => {
     loadAppointments();
   }, []);
-
-  useEffect(() => {
-    if (date) loadAvailability(date);
-  }, [date]);
-
-  const saveAvailability = async () => {
-    if (!date) return;
-
-    await supabase.from("unavailable").delete().eq("date", date);
-    await supabase.from("schedule").delete().eq("date", date);
-
-    if (onLeave) {
-      await supabase.from("unavailable").insert({
-        date,
-        start_time: null,
-        end_time: null,
-      });
-    } else {
-      await supabase.from("schedule").insert({
-        date,
-        start_time: start,
-        end_time: end,
-        slot_duration: 30,
-      });
-    }
-  };
 
   const updateStatus = async (id: string, status: string) => {
     await supabase.from("appointments").update({ status }).eq("id", id);
@@ -120,7 +61,7 @@ const Dashboard = () => {
           <div>
             <h1 className="font-serif text-3xl font-bold">Dashboard</h1>
             <p className="text-muted-foreground">
-              Appointments, calendar and availability
+              Appointments and calendar
             </p>
           </div>
 
@@ -137,17 +78,11 @@ const Dashboard = () => {
             >
               Calendar
             </Button>
-            <Button
-              variant={tab === "availability" ? "default" : "outline"}
-              onClick={() => setTab("availability")}
-            >
-              Availability
-            </Button>
           </div>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-6">
-          <div className={cn(tab !== "availability" ? "lg:col-span-2" : "lg:col-span-3")}>
+          <div className="lg:col-span-2">
             {tab === "appointments" && (
               <div className="bg-card rounded-2xl border shadow-card divide-y">
                 {appointments.map((a) => (
@@ -166,9 +101,12 @@ const Dashboard = () => {
                       <div
                         className={cn(
                           "text-xs px-3 py-1 rounded-full",
-                          a.status === "completed" && "bg-green-100 text-green-700",
-                          a.status === "cancelled" && "bg-red-100 text-red-700",
-                          a.status === "booked" && "bg-primary/10 text-primary"
+                          a.status === "completed" &&
+                            "bg-green-100 text-green-700",
+                          a.status === "cancelled" &&
+                            "bg-red-100 text-red-700",
+                          a.status === "booked" &&
+                            "bg-primary/10 text-primary"
                         )}
                       >
                         {a.status}
@@ -185,7 +123,11 @@ const Dashboard = () => {
                   <Button
                     variant="outline"
                     onClick={() =>
-                      setWeekStart(new Date(weekStart.setDate(weekStart.getDate() - 7)))
+                      setWeekStart(
+                        new Date(
+                          weekStart.setDate(weekStart.getDate() - 7)
+                        )
+                      )
                     }
                   >
                     Prev
@@ -194,7 +136,11 @@ const Dashboard = () => {
                   <Button
                     variant="outline"
                     onClick={() =>
-                      setWeekStart(new Date(weekStart.setDate(weekStart.getDate() + 7)))
+                      setWeekStart(
+                        new Date(
+                          weekStart.setDate(weekStart.getDate() + 7)
+                        )
+                      )
                     }
                   >
                     Next
@@ -231,7 +177,9 @@ const Dashboard = () => {
                               className="w-full text-left bg-muted/40 hover:bg-muted px-2 py-1 rounded-lg text-xs"
                             >
                               <div className="font-medium">{a.start_time}</div>
-                              <div className="truncate">{a.patient_name}</div>
+                              <div className="truncate">
+                                {a.patient_name}
+                              </div>
                             </button>
                           ))}
                         </div>
@@ -239,32 +187,6 @@ const Dashboard = () => {
                     );
                   })}
                 </div>
-              </div>
-            )}
-
-            {tab === "availability" && (
-              <div className="bg-card rounded-2xl border shadow-card p-6 max-w-md space-y-5">
-                <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-
-                <label className="flex items-center gap-3 text-sm">
-                  <input
-                    type="checkbox"
-                    checked={onLeave}
-                    onChange={(e) => setOnLeave(e.target.checked)}
-                  />
-                  Full day leave
-                </label>
-
-                {!onLeave && (
-                  <div className="grid grid-cols-2 gap-4">
-                    <Input type="time" value={start} onChange={(e) => setStart(e.target.value)} />
-                    <Input type="time" value={end} onChange={(e) => setEnd(e.target.value)} />
-                  </div>
-                )}
-
-                <Button onClick={saveAvailability} className="w-full">
-                  Save Availability
-                </Button>
               </div>
             )}
           </div>
@@ -281,15 +203,21 @@ const Dashboard = () => {
               <div className="space-y-3 text-sm">
                 <div>
                   <div className="text-muted-foreground">Name</div>
-                  <div className="font-medium">{selected.patient_name}</div>
+                  <div className="font-medium">
+                    {selected.patient_name}
+                  </div>
                 </div>
                 <div>
                   <div className="text-muted-foreground">Phone</div>
-                  <div className="font-medium">{selected.patient_phone || "—"}</div>
+                  <div className="font-medium">
+                    {selected.patient_phone || "—"}
+                  </div>
                 </div>
                 <div>
                   <div className="text-muted-foreground">Email</div>
-                  <div className="font-medium">{selected.patient_email || "—"}</div>
+                  <div className="font-medium">
+                    {selected.patient_email || "—"}
+                  </div>
                 </div>
                 <div>
                   <div className="text-muted-foreground">Date</div>
@@ -307,19 +235,27 @@ const Dashboard = () => {
                 <div className="grid grid-cols-2 gap-3">
                   <Button
                     variant="outline"
-                    onClick={() => updateStatus(selected.id, "cancelled")}
+                    onClick={() =>
+                      updateStatus(selected.id, "cancelled")
+                    }
                   >
                     Cancel
                   </Button>
                   <Button
-                    onClick={() => updateStatus(selected.id, "completed")}
+                    onClick={() =>
+                      updateStatus(selected.id, "completed")
+                    }
                   >
                     Mark Completed
                   </Button>
                 </div>
               )}
 
-              <Button variant="outline" onClick={() => setSelected(null)} className="w-full">
+              <Button
+                variant="outline"
+                onClick={() => setSelected(null)}
+                className="w-full"
+              >
                 Close
               </Button>
             </div>

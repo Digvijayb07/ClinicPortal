@@ -1,15 +1,47 @@
 import { Play } from "lucide-react";
+import { motion } from "framer-motion";
+
+const videos = Array.from({ length: 10 }, (_, i) => ({
+  src: `/videos/video${i + 1}.mp4`,
+}));
+
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
 
 const Gallery = () => {
-  // Placeholder video slots
-  const videoSlots = Array.from({ length: 12 }, (_, i) => i + 1);
-
   return (
     <main className="pt-20">
       {/* Hero Section */}
       <section className="section-padding bg-gradient-hero">
         <div className="container-custom">
-          <div className="max-w-3xl mx-auto text-center animate-fade-in">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="max-w-3xl mx-auto text-center"
+          >
             <span className="inline-block px-4 py-2 rounded-full bg-primary-foreground/20 text-primary-foreground font-medium text-sm mb-6">
               Patient Stories
             </span>
@@ -17,50 +49,61 @@ const Gallery = () => {
               Gallery
             </h1>
             <p className="text-xl text-primary-foreground/80 leading-relaxed">
-              Watch testimonials and success stories from our patients. See the real impact of our treatments.
+              Watch real treatment sessions and patient experiences from our clinic.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Video Grid */}
       <section className="section-padding bg-card">
         <div className="container-custom">
-          <div className="text-center mb-12 animate-fade-in">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
               Patient Videos
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Coming soon! We'll be adding patient testimonial videos and treatment demonstrations here.
+              Real stories, real recoveries.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {videoSlots.map((slot, index) => (
-              <div
-                key={slot}
-                className="aspect-video bg-gradient-subtle rounded-2xl border-2 border-dashed border-border flex items-center justify-center group hover:border-primary/50 transition-smooth cursor-pointer animate-fade-in"
-                style={{ animationDelay: `${index * 0.05}s` }}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {videos.map((video, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className="group rounded-2xl overflow-hidden border border-border bg-muted hover:shadow-card transition-smooth"
               >
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-muted flex items-center justify-center mb-3 group-hover:bg-primary/10 transition-smooth">
-                    <Play className="w-8 h-8 text-muted-foreground group-hover:text-primary transition-smooth" />
-                  </div>
-                  <p className="text-sm text-muted-foreground">Video {slot}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+                <div className="relative aspect-video">
+                  <video
+                    src={video.src}
+                    controls
+                    preload="metadata"
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
 
-          <div className="text-center mt-12 animate-fade-in">
-            <p className="text-muted-foreground">
-              Want to share your success story?{" "}
-              <a href="/contact" className="text-primary hover:underline">
-                Contact us
-              </a>{" "}
-              to learn how you can be featured.
-            </p>
-          </div>
+                  <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-smooth">
+                    <div className="w-16 h-16 rounded-full bg-black/40 flex items-center justify-center">
+                      <Play className="w-8 h-8 text-white" />
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
         </div>
       </section>
     </main>

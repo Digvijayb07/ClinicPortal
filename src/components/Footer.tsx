@@ -2,60 +2,55 @@ import { Link } from "react-router-dom";
 import {
   Stethoscope,
   Phone,
-  Mail,
   MapPin,
   Clock,
-  Facebook,
   Instagram,
-  Twitter,
 } from "lucide-react";
 
 const Footer = () => {
   return (
     <footer className="bg-foreground text-primary-foreground">
-      <div className="container-custom py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="container-custom py-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
           {/* Brand */}
-          <div>
-            <Link to="/" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
-                <Stethoscope className="w-5 h-5 text-primary-foreground" />
+          <div className="space-y-4">
+            <Link to="/" className="flex items-center gap-2">
+              <div className="w-9 h-9 rounded-lg bg-primary flex items-center justify-center">
+                <Stethoscope className="w-4 h-4 text-primary-foreground" />
               </div>
-              <span className="font-serif text-xl font-semibold">
+              <span className="font-serif text-lg font-semibold">
                 PhysioFit Clinic
               </span>
             </Link>
-            <p className="text-primary-foreground/70 mb-6">
-              Dr. Aditi’s
-              <br />
-              PhysioFit Clinic
-              <br />
-              Advance Physiotherapy & Sports Clinic
+
+            <p className="text-sm text-primary-foreground/70 leading-relaxed">
+              Dr. Aditi’s PhysioFit Clinic <br />
+              Advanced Physiotherapy & Sports Care
             </p>
-            <div className="flex gap-4">
-              <a
-                href="https://www.instagram.com/your.physiofit?igsh=MW9yM3pmZzMycXlleQ=="
-                target="_blank"
-                className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary transition-smooth"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-            </div>
+
+            <a
+              href="https://www.instagram.com/your.physiofit?igsh=MW9yM3pmZzMycXlleQ=="
+              target="_blank"
+              className="inline-flex items-center gap-2 text-primary-foreground/70 hover:text-primary transition-smooth"
+            >
+              <Instagram className="w-4 h-4" />
+              <span className="text-sm">Instagram</span>
+            </a>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-serif text-lg font-semibold mb-6">
+            <h4 className="font-serif text-base font-semibold mb-4">
               Quick Links
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2 text-sm">
               {[
                 { name: "Home", path: "/" },
-                { name: "About Us", path: "/about" },
-                { name: "Services", path: "/services/chiropractic" },
+                { name: "About", path: "/about" },
                 { name: "Procedures", path: "/procedures" },
                 { name: "Gallery", path: "/gallery" },
-                { name: "Contact Us", path: "/contact" },
+                { name: "Contact", path: "/contact" },
               ].map((link) => (
                 <li key={link.name}>
                   <Link
@@ -71,87 +66,68 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h4 className="font-serif text-lg font-semibold mb-6">
-              Our Services
+            <h4 className="font-serif text-base font-semibold mb-4">
+              Services
             </h4>
-
-            <ul className="list-none space-y-3">
-              {[
-                { name: "Chiropractic Care", path: "chiropractic" },
-                {
-                  name: "Sports and Return to Sports Rehabilitation",
-                  path: "sports-rehab",
-                },
-              ].map((service) => (
-                <li key={service.name}>
-                  <a
-                    href={service.path}
-                    className="text-primary-foreground/70 hover:text-primary transition"
-                  >
-                    {service.name}
-                  </a>
-                </li>
-              ))}
+            <ul className="space-y-2 text-sm">
+              <li>
+                <Link
+                  to="/services/chiropractic"
+                  className="text-primary-foreground/70 hover:text-primary transition-smooth"
+                >
+                  Chiropractic Care
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/services/sports-rehab"
+                  className="text-primary-foreground/70 hover:text-primary transition-smooth"
+                >
+                  Sports Rehabilitation
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Contact Info */}
-          <div>
-            <h4 className="font-serif text-lg font-semibold mb-6">
-              Contact Us
+          {/* Contact */}
+          <div className="space-y-3 text-sm">
+            <h4 className="font-serif text-base font-semibold mb-4">
+              Contact
             </h4>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-                <span className="text-primary-foreground/70">
-                  Shop no 20, Bansal Plaza, Dr. Aditi’s PhysioFit Clinic, Ravet,
-                  Pune, Maharashtra 412101
-                </span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-primary shrink-0" />
-                <span className="text-primary-foreground/70">
-                  Phone Number: <br />
-                  +91 07219289369
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <Clock className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-                <div className="text-primary-foreground/70">
-                  Mon - Sat:
-                  <br />
-                  Morning: 10:00 AM - 01:00 PM
-                  <br />
-                  Evening: 05:00 PM - 09:00 PM
-                  <br />
-                  Sunday Closed
-                </div>
-              </li>
-            </ul>
+
+            <div className="flex items-start gap-3 text-primary-foreground/70">
+              <MapPin className="w-4 h-4 mt-0.5 text-secondary shrink-0 drop-shadow-[0_0_6px_hsl(184_85%_45%/0.6)]" />
+              <span>
+                Bansal Plaza, Ravet <br />
+                Pune, Maharashtra
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3 text-primary-foreground/70">
+              <Phone className="w-4 h-4 text-secondary shrink-0 drop-shadow-[0_0_6px_hsl(184_85%_45%/0.6)]" />
+              <span>+91 72192 89369</span>
+            </div>
+
+            <div className="flex items-start gap-3 text-primary-foreground/70">
+              <Clock className="w-4 h-4 mt-0.5 text-secondary shrink-0 drop-shadow-[0_0_6px_hsl(184_85%_45%/0.6)]" />
+              <span>
+                Mon – Sat <br />
+                10:30 AM – 1:30 PM <br />
+                5:00 PM – 9:00 PM
+              </span>
+            </div>
           </div>
+
+
         </div>
       </div>
 
-      {/* Bottom Bar */}
+      {/* Bottom bar */}
       <div className="border-t border-primary-foreground/10">
-        <div className="container-custom py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-primary-foreground/50 text-sm">
-            <p>© 2024 PhysioFit Clinic. All rights reserved.</p>
-            <div className="flex gap-6">
-              <a
-                href="#"
-                className="hover:text-primary-foreground transition-smooth"
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="#"
-                className="hover:text-primary-foreground transition-smooth"
-              >
-                Terms of Service
-              </a>
-            </div>
-          </div>
+        <div className="container-custom py-4">
+          <p className="text-center text-xs text-primary-foreground/50">
+            © {new Date().getFullYear()} PhysioFit Clinic. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

@@ -80,7 +80,7 @@ const Contact = () => {
                       Evening: 05:00 PM – 09:00 PM
                       <br />
                       Sunday: Closed
-                    </>
+                    </>  
                   ),
                 },
               ].map((item) => (
@@ -96,7 +96,7 @@ const Contact = () => {
                       <a
                         href={item.link}
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="noopener noreferrer"  
                         className="text-muted-foreground hover:text-primary transition-smooth whitespace-pre-line"
                       >
                         {item.content}
@@ -107,7 +107,7 @@ const Contact = () => {
                       </p>
                     )}
                   </div>
-                </div>
+                </div> 
               ))}
             </div>
 
@@ -122,7 +122,7 @@ const Contact = () => {
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Dr. Aditi’s PhysioFit Clinic Location"
               />
-            </div>
+            </div> 
 
           </div>
         </div>

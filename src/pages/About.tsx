@@ -1,12 +1,57 @@
-import { MapPin, Phone, Mail, Clock, Award, Users, Heart } from "lucide-react";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  Award,
+  Users,
+  Heart,
+} from "lucide-react";
+import { motion, Variants } from "framer-motion";
+
+const viewport = { once: true, margin: "-120px" };
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.25, 0.8, 0.25, 1] },
+  },
+};
+
+const slideLeft: Variants = {
+  hidden: { opacity: 0, x: -60 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: [0.25, 0.8, 0.25, 1] },
+  },
+};
+
+const slideRight: Variants = {
+  hidden: { opacity: 0, x: 60 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: [0.25, 0.8, 0.25, 1] },
+  },
+};
+
 
 const About = () => {
   return (
     <main className="pt-20">
-      {/* Hero Section */}
+      {/* ================= HERO ================= */}
       <section className="section-padding bg-gradient-subtle">
         <div className="container-custom">
-          <div className="max-w-3xl mx-auto text-center animate-fade-in">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+            className="max-w-3xl mx-auto text-center"
+          >
             <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-medium text-sm mb-6">
               About Us
             </span>
@@ -14,37 +59,51 @@ const About = () => {
               Your Partner in Health & Wellness
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              At PhysioFit Clinic, we provide advanced physiotherapy and sports rehabilitation services. Our mission is simple: to help you achieve optimal health through personalized, evidence-based care led by Dr. Aditi Kulkarni.
+              At PhysioFit Clinic, we provide advanced physiotherapy and sports
+              rehabilitation services led by Dr. Aditi Kulkarni.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* About Content */}
+      {/* ================= STORY + WHY ================= */}
       <section className="section-padding bg-card">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-16">
-            {/* Introduction */}
-            <div className="animate-fade-in">
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">
+            {/* Story */}
+            <motion.div
+              variants={slideLeft}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewport}
+            >
+              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">
                 Our Story
               </h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  Dr. Aditi's PhysioFit — Advanced Physiotherapy and Sports Clinic was founded with a vision to provide world-class physiotherapy and chiropractic care. Dr. Aditi Kulkarni, a Gold Medalist in Sports Physiotherapy, built this practice on the belief that every patient deserves a personalized approach to their health journey.
+                  Dr. Aditi’s PhysioFit was founded with a vision to deliver
+                  world-class physiotherapy and chiropractic care.
                 </p>
                 <p>
-                  With advanced certifications in Manual Therapy and Chiropractic Treatment, Dr. Aditi has worked extensively with athletes, including serving as a Sports Physiotherapist for the Mangalore Badminton Association and Dakshin Kannada Kabaddi Association.
+                  A Gold Medalist in Sports Physiotherapy, Dr. Aditi has worked
+                  with professional athletes and sports associations.
                 </p>
                 <p>
-                  Today, PhysioFit Clinic continues to invest in the latest techniques and technologies to ensure our patients receive the highest quality care possible. We're proud to be a trusted healthcare partner for athletes and individuals seeking optimal recovery.
+                  Today, PhysioFit Clinic combines expertise, compassion, and
+                  modern techniques for long-term recovery.
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Why Choose Us */}
-            <div className="animate-fade-in" style={{ animationDelay: "0.2s" }}>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-6">
+            <motion.div
+              variants={slideRight}
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewport}
+            >
+              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-6">
                 Why Choose Us
               </h2>
               <div className="space-y-6">
@@ -52,53 +111,75 @@ const About = () => {
                   {
                     icon: Award,
                     title: "Expert Care",
-                    description: "Board-certified professionals with specialized training in chiropractic care and sports medicine.",
+                    description:
+                      "Specialized training in chiropractic care and sports medicine.",
                   },
                   {
                     icon: Users,
-                    title: "Patient-Centered Approach",
-                    description: "We listen to your concerns and develop customized treatment plans tailored to your unique needs.",
+                    title: "Patient-Centered",
+                    description:
+                      "Customized treatment plans tailored to your needs.",
                   },
                   {
                     icon: Heart,
-                    title: "Compassionate Service",
-                    description: "We treat every patient like family, providing warm, supportive care in a comfortable environment.",
+                    title: "Compassionate",
+                    description:
+                      "Warm, supportive care in a comfortable environment.",
                   },
-                ].map((item) => (
-                  <div key={item.title} className="flex gap-4 p-6 rounded-xl bg-background border border-border">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                ].map((item, i) => (
+                  <motion.div
+                    key={item.title}
+                    whileHover={{
+                      y: -4,
+                      boxShadow: "0 16px 40px rgba(0,0,0,0.15)",
+                    }}
+                    transition={{ type: "spring", stiffness: 220, damping: 18 }}
+                    className="flex gap-4 p-6 rounded-xl bg-background border border-border will-change-transform"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                       <item.icon className="w-6 h-6 text-primary" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-lg text-foreground mb-2">{item.title}</h3>
-                      <p className="text-muted-foreground">{item.description}</p>
+                      <h3 className="font-semibold text-lg mb-1">
+                        {item.title}
+                      </h3>
+                      <p className="text-muted-foreground">
+                        {item.description}
+                      </p>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Contact Information */}
+      {/* ================= VISIT ================= */}
       <section className="section-padding bg-gradient-subtle">
         <div className="container-custom">
-          <div className="text-center mb-12 animate-fade-in">
-            <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewport}
+            className="text-center mb-12"
+          >
+            <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">
               Visit Our Clinic
             </h2>
-            <p className="text-lg text-muted-foreground">
-              We'd love to welcome you to our modern, comfortable facility.
+            <p className="text-muted-foreground">
+              We’d love to welcome you to our modern facility.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
                 icon: MapPin,
                 title: "Address",
-                content: "PhysioFit Clinic: Shop no 20, Bansal Plaza, Dr. Aditi’s PhysioFit Clinic, Ravet, Pune, Maharashtra 412101",
+                content:
+                  "Shop no 20, Bansal Plaza, Ravet, Pune, Maharashtra 412101",
               },
               {
                 icon: Phone,
@@ -113,20 +194,33 @@ const About = () => {
               {
                 icon: Clock,
                 title: "Clinic Hours",
-                content: "Morning: 8:00 AM - 1:00 PM\nEvening: 5:00 PM - 9:00 PM\nSunday Closed",
+                content:
+                  "Morning: 8:00 AM - 1:00 PM\nEvening: 5:00 PM - 9:00 PM\nSunday Closed",
               },
-            ].map((item, index) => (
-              <div
+            ].map((item, i) => (
+              <motion.div
                 key={item.title}
-                className="text-center p-6 rounded-2xl bg-card shadow-card border border-border animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                variants={fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewport}
+                transition={{ delay: i * 0.08 }}
+                whileHover={{
+                  y: -4,
+                  boxShadow: "0 16px 40px rgba(0,0,0,0.15)",
+                }}
+                className="text-center p-6 rounded-2xl bg-card border border-border will-change-transform"
               >
                 <div className="w-14 h-14 mx-auto rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                   <item.icon className="w-7 h-7 text-primary" />
                 </div>
-                <h3 className="font-semibold text-lg text-foreground mb-2">{item.title}</h3>
-                <p className="text-muted-foreground whitespace-pre-line">{item.content}</p>
-              </div>
+                <h3 className="font-semibold text-lg mb-2">
+                  {item.title}
+                </h3>
+                <p className="text-muted-foreground whitespace-pre-line">
+                  {item.content}
+                </p>
+              </motion.div>
             ))}
           </div>
         </div>

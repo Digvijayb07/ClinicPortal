@@ -56,23 +56,27 @@ const Dashboard = () => {
 
   return (
     <main className="min-h-screen pt-20 bg-gradient-subtle">
-      <div className="container-custom py-10">
-        <div className="flex justify-between items-center mb-8">
+      <div className="container-custom py-6 sm:py-10">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
           <div>
-            <h1 className="font-serif text-3xl font-bold">Dashboard</h1>
-            <p className="text-muted-foreground">
+            <h1 className="font-serif text-2xl sm:text-3xl font-bold">
+              Dashboard
+            </h1>
+            <p className="text-muted-foreground text-sm">
               Appointments and calendar
             </p>
           </div>
 
           <div className="flex gap-2">
             <Button
+              size="sm"
               variant={tab === "appointments" ? "default" : "outline"}
               onClick={() => setTab("appointments")}
             >
               Appointments
             </Button>
             <Button
+              size="sm"
               variant={tab === "calendar" ? "default" : "outline"}
               onClick={() => setTab("calendar")}
             >
@@ -89,24 +93,27 @@ const Dashboard = () => {
                   <button
                     key={a.id}
                     onClick={() => setSelected(a)}
-                    className="w-full text-left p-5 hover:bg-muted/40 transition"
+                    className="w-full text-left p-4 sm:p-5 hover:bg-muted/40 transition"
                   >
-                    <div className="flex justify-between items-center">
+                    <div className="flex justify-between items-center gap-3">
                       <div>
-                        <div className="font-medium">{a.patient_name}</div>
-                        <div className="text-sm text-muted-foreground">
+                        <div className="font-medium">
+                          {a.patient_name}
+                        </div>
+                        <div className="text-xs sm:text-sm text-muted-foreground">
                           {a.date} • {a.start_time} – {a.end_time}
                         </div>
                       </div>
+
                       <div
                         className={cn(
-                          "text-xs px-3 py-1 rounded-full",
+                          "text-xs px-3 py-1 rounded-full whitespace-nowrap",
                           a.status === "completed" &&
-                            "bg-green-100 text-green-700",
+                          "bg-green-100 text-green-700",
                           a.status === "cancelled" &&
-                            "bg-red-100 text-red-700",
+                          "bg-red-100 text-red-700",
                           a.status === "booked" &&
-                            "bg-primary/10 text-primary"
+                          "bg-primary/10 text-primary"
                         )}
                       >
                         {a.status}
@@ -118,28 +125,30 @@ const Dashboard = () => {
             )}
 
             {tab === "calendar" && (
-              <div className="bg-card rounded-2xl border shadow-card p-6 space-y-4">
+              <div className="bg-card rounded-2xl border shadow-card p-4 sm:p-6 space-y-4">
                 <div className="flex justify-between items-center">
                   <Button
+                    size="sm"
                     variant="outline"
                     onClick={() =>
                       setWeekStart(
-                        new Date(
-                          weekStart.setDate(weekStart.getDate() - 7)
-                        )
+                        new Date(weekStart.setDate(weekStart.getDate() - 7))
                       )
                     }
                   >
                     Prev
                   </Button>
-                  <div className="font-medium">Weekly Calendar</div>
+
+                  <div className="font-medium text-sm sm:text-base">
+                    Weekly Calendar
+                  </div>
+
                   <Button
+                    size="sm"
                     variant="outline"
                     onClick={() =>
                       setWeekStart(
-                        new Date(
-                          weekStart.setDate(weekStart.getDate() + 7)
-                        )
+                        new Date(weekStart.setDate(weekStart.getDate() + 7))
                       )
                     }
                   >
@@ -147,7 +156,8 @@ const Dashboard = () => {
                   </Button>
                 </div>
 
-                <div className="grid grid-cols-7 gap-3">
+                {/* MOBILE DAY LIST */}
+                <div className="space-y-3 md:hidden">
                   {getWeekDates(weekStart).map((day) => {
                     const dateStr = day.toLocaleDateString("en-CA");
                     const dayAppointments = appointments.filter(
@@ -155,46 +165,101 @@ const Dashboard = () => {
                     );
 
                     return (
-                      <div
+                      <button
                         key={dateStr}
+                        onClick={() =>
+                          dayAppointments.length &&
+                          setSelected(dayAppointments[0])
+                        }
                         className={cn(
-                          "border rounded-xl p-2 min-h-[150px]",
+                          "w-full text-left border rounded-xl p-4 space-y-2",
                           dateStr === today && "border-primary"
                         )}
                       >
-                        <div className="text-sm font-medium mb-2">
+                        <div className="font-medium">
                           {day.toLocaleDateString(undefined, {
-                            weekday: "short",
+                            weekday: "long",
                             day: "numeric",
+                            month: "short",
                           })}
                         </div>
 
-                        <div className="space-y-2">
-                          {dayAppointments.map((a) => (
-                            <button
+                        {dayAppointments.length === 0 ? (
+                          <div className="text-sm text-muted-foreground">
+                            No appointments
+                          </div>
+                        ) : (
+                          dayAppointments.map((a) => (
+                            <div
                               key={a.id}
-                              onClick={() => setSelected(a)}
-                              className="w-full text-left bg-muted/40 hover:bg-muted px-2 py-1 rounded-lg text-xs"
+                              className="flex justify-between text-sm bg-muted/40 rounded-lg px-3 py-2"
                             >
-                              <div className="font-medium">{a.start_time}</div>
-                              <div className="truncate">
+                              <span>{a.start_time}</span>
+                              <span className="truncate max-w-[140px]">
                                 {a.patient_name}
-                              </div>
-                            </button>
-                          ))}
-                        </div>
-                      </div>
+                              </span>
+                            </div>
+                          ))
+                        )}
+                      </button>
                     );
                   })}
                 </div>
+
+                {/* DESKTOP WEEK GRID */}
+                <div className="hidden md:block">
+                  <div className="grid grid-cols-7 gap-3">
+                    {getWeekDates(weekStart).map((day) => {
+                      const dateStr = day.toLocaleDateString("en-CA");
+                      const dayAppointments = appointments.filter(
+                        (a) => a.date === dateStr
+                      );
+
+                      return (
+                        <div
+                          key={dateStr}
+                          className={cn(
+                            "border rounded-xl p-2 min-h-[150px]",
+                            dateStr === today && "border-primary"
+                          )}
+                        >
+                          <div className="text-sm font-medium mb-2">
+                            {day.toLocaleDateString(undefined, {
+                              weekday: "short",
+                              day: "numeric",
+                            })}
+                          </div>
+
+                          <div className="space-y-2">
+                            {dayAppointments.map((a) => (
+                              <button
+                                key={a.id}
+                                onClick={() => setSelected(a)}
+                                className="w-full text-left bg-muted/40 hover:bg-muted px-2 py-1 rounded-lg text-xs"
+                              >
+                                <div className="font-medium">
+                                  {a.start_time}
+                                </div>
+                                <div className="truncate">
+                                  {a.patient_name}
+                                </div>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
               </div>
             )}
+
           </div>
 
           {selected && (
-            <div className="bg-card rounded-2xl border shadow-card p-6 space-y-5">
+            <div className="bg-card rounded-2xl border shadow-card p-5 space-y-5">
               <div className="flex justify-between items-center">
-                <h2 className="font-serif text-xl font-semibold">
+                <h2 className="font-serif text-lg font-semibold">
                   Appointment Details
                 </h2>
                 <button onClick={() => setSelected(null)}>✕</button>
@@ -202,31 +267,44 @@ const Dashboard = () => {
 
               <div className="space-y-3 text-sm">
                 <div>
-                  <div className="text-muted-foreground">Name</div>
+                  <div className="text-muted-foreground">
+                    Name
+                  </div>
                   <div className="font-medium">
                     {selected.patient_name}
                   </div>
                 </div>
                 <div>
-                  <div className="text-muted-foreground">Phone</div>
+                  <div className="text-muted-foreground">
+                    Phone
+                  </div>
                   <div className="font-medium">
                     {selected.patient_phone || "—"}
                   </div>
                 </div>
                 <div>
-                  <div className="text-muted-foreground">Email</div>
+                  <div className="text-muted-foreground">
+                    Email
+                  </div>
                   <div className="font-medium">
                     {selected.patient_email || "—"}
                   </div>
                 </div>
                 <div>
-                  <div className="text-muted-foreground">Date</div>
-                  <div className="font-medium">{selected.date}</div>
+                  <div className="text-muted-foreground">
+                    Date
+                  </div>
+                  <div className="font-medium">
+                    {selected.date}
+                  </div>
                 </div>
                 <div>
-                  <div className="text-muted-foreground">Time</div>
+                  <div className="text-muted-foreground">
+                    Time
+                  </div>
                   <div className="font-medium">
-                    {selected.start_time} – {selected.end_time}
+                    {selected.start_time} –{" "}
+                    {selected.end_time}
                   </div>
                 </div>
               </div>
@@ -236,14 +314,20 @@ const Dashboard = () => {
                   <Button
                     variant="outline"
                     onClick={() =>
-                      updateStatus(selected.id, "cancelled")
+                      updateStatus(
+                        selected.id,
+                        "cancelled"
+                      )
                     }
                   >
                     Cancel
                   </Button>
                   <Button
                     onClick={() =>
-                      updateStatus(selected.id, "completed")
+                      updateStatus(
+                        selected.id,
+                        "completed"
+                      )
                     }
                   >
                     Mark Completed

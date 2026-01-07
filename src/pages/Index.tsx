@@ -44,7 +44,6 @@ const fadeUp = {
   },
 };
 
-/* ---------------- PAGE ---------------- */
 
 const Index = () => {
   const stats = [
@@ -101,15 +100,34 @@ const Index = () => {
     <main className="pt-20 overflow-hidden">
       <Helmet>
         <title>
-          Physiotherapy & Chiropractic Clinic in Ravet, Pune | Dr. Aditi Kulkarni | PhysioFit
+          Physiotherapy & Chiropractic Clinic in Ravet, Pune | Dr. Aditi PhysioFit
         </title>
+
         <meta
           name="description"
-          content="Dr. Aditi’s PhysioFit Clinic in Ravet, Pune offers expert physiotherapy, chiropractic care, sports rehabilitation and pain management. Book your consultation today."
+          content="Dr. Aditi’s PhysioFit Clinic in Ravet, Pune offers expert physiotherapy, chiropractic care, sports rehabilitation and pain management."
         />
+
+        <meta property="og:title" content="Dr. Aditi’s PhysioFit Clinic – Ravet, Pune" />
+        <meta
+          property="og:description"
+          content="Expert physiotherapy, chiropractic care and sports rehabilitation in Ravet, Pune."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://draditisphysiofit.in/" />
+        <meta property="og:image" content="https://draditisphysiofit.in/og-image.jpg" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Dr. Aditi’s PhysioFit Clinic – Ravet, Pune" />
+        <meta
+          name="twitter:description"
+          content="Expert physiotherapy, chiropractic care and sports rehabilitation in Ravet, Pune."
+        />
+        <meta name="twitter:image" content="https://draditisphysiofit.in/og-image.jpg" />
       </Helmet>
 
-      {/* ================= HERO ================= */}
+
+
       <section className="relative py-24">
         <motion.div
           variants={shapeVariant}
@@ -120,7 +138,7 @@ const Index = () => {
         />
 
         <div className="container-custom relative">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <motion.div
               initial={{ opacity: 0, x: -80 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -129,11 +147,11 @@ const Index = () => {
               className="flex justify-center"
             >
               <div className="relative">
-                <div className=" absolute inset-0 bg-primary/20 rounded-3xl transform rotate-3"></div>
+                <div className="absolute inset-0 bg-primary/20 rounded-3xl transform rotate-3"></div>
                 <img
                   src={draditi}
                   alt="Dr. Aditi Kulkarni"
-                  className=" relative rounded-3xl shadow-elegant w-full max-w-md object-cover"
+                  className="relative rounded-3xl shadow-elegant w-full max-w-md object-cover"
                 />
               </div>
             </motion.div>
@@ -143,20 +161,20 @@ const Index = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={viewport}
               transition={{ duration: 0.8, ease: [0.25, 0.8, 0.25, 1] }}
+              className="text-center lg:text-left"
             >
-              <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-                PhysioFit Clinic
-              </span>
-
-              <h1 className="font-serif text-5xl lg:text-6xl font-bold mb-4">
-                Dr. Aditi Kulkarni
+              <h1 className="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight mb-6">
+                Dr. Aditi’s PhysioFit 
+                <span className="block text-primary mt-2 text-2xl sm:text-3xl lg:text-4xl">
+                  Advanced Physiotherapy & Sports Clinic
+                </span>
               </h1>
 
               <p className="text-primary font-medium mb-6">
                 Sports & Orthopaedic Physiotherapist · Chiropractor
               </p>
 
-              <p className="text-muted-foreground mb-10 max-w-xl">
+              <p className="text-muted-foreground mb-10 max-w-xl mx-auto lg:mx-0">
                 Evidence-based rehabilitation and chiropractic care with a
                 patient-first approach.
               </p>
@@ -194,7 +212,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ================= SPECIALIZATION ================= */}
+
       <section className="relative py-24 bg-card">
         <motion.div
           variants={shapeVariant}
@@ -247,7 +265,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ================= REVIEWS ================= */}
       <section className="py-24 bg-card">
         <div className="container-custom">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

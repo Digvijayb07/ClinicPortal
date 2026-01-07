@@ -30,7 +30,7 @@ const Footer = () => {
             </p>
 
             <a
-              href="https://www.instagram.com/your.physiofit?igsh=MW9yM3pmZzMycXlleQ=="
+              href="https://www.instagram.com/doctorsports.in/"
               target="_blank"
               className="inline-flex items-center gap-2 text-primary-foreground/70 hover:text-primary transition-smooth"
             >
